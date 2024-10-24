@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -19,6 +19,38 @@ JOIN inventory i ON r.inventory_id = i.inventory_id
 JOIN film f ON i.film_id = f.film_id
 GROUP BY f.title
 ORDER BY Total DESC
+LIMIT 10;
+
+
+SELECT f.title AS Filme, COUNT(r.rental_id) AS Total
+FROM rental r
+JOIN inventory i ON r.inventory_id = i.inventory_id
+JOIN film f ON i.film_id = f.film_id
+GROUP BY f.title
+ORDER BY Total 
+LIMIT 10;
+
+SELECT f.title AS Filme, COUNT(r.rental_id) AS Total
+FROM rental r
+JOIN inventory i ON r.inventory_id = i.inventory_id
+JOIN film f ON i.film_id = f.film_id
+GROUP BY f.title
+ORDER BY Total DESC
+LIMIT 10;
+
+
+EXPLAIN  SELECT f.title, COUNT(r.rental_id) AS total_rentals
+
+FROM film f
+
+JOIN inventory i ON f.film_id = i.film_id
+
+JOIN rental r ON i.inventory_id = r.inventory_id
+
+GROUP BY f.title
+
+ORDER BY total_rentals DESC
+
 LIMIT 10;]]></console>
     </connection>
   </component>
@@ -30,9 +62,6 @@ LIMIT 10;]]></console>
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
-  </component>
-  <component name="DBNavigator.Project.FileConnectionMappingManager">
-    <mapping file-url="file://$APPLICATION_CONFIG_DIR$/consoles/db/8a4cb576-99e6-4c2d-ba4b-c9cdaef66d0d/console.sql" connection-id="virtual-mysql-connection" session-id="" current-schema="" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
