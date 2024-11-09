@@ -5,6 +5,22 @@
     <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
+  <component name="DBNavigator.Project.DataExportManager">
+    <export-instructions>
+      <create-header value="true" />
+      <friendly-headers value="false" />
+      <quote-values-containing-separator value="true" />
+      <quote-all-values value="false" />
+      <value-separator value="" />
+      <file-name value="ExecutionPlanEfolioASGBD.xls" />
+      <file-location value="$USER_HOME$/Downloads" />
+      <scope value="GLOBAL" />
+      <destination value="FILE" />
+      <format value="EXCEL" />
+      <charset value="UTF-8" />
+      <charset value="UTF-8" />
+    </export-instructions>
+  </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
@@ -51,7 +67,36 @@ GROUP BY f.title
 
 ORDER BY total_rentals DESC
 
-LIMIT 10;]]></console>
+LIMIT 10;
+
+SELECT first_name, last_name
+FROM customer
+JOIN payment ON customer.customer_id = payment.customer_id
+GROUP BY customer.customer_id 
+ORDER BY COUNT(payment.payment_id) DESC
+LIMIT 5;
+
+SELECT c.first_name, c.last_name, COUNT(p.payment_id) AS total_payments
+FROM customer c
+JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY c.customer_id
+ORDER BY total_payments DESC
+LIMIT 5; 
+
+
+EXPLAIN SELECT c.first_name, c.last_name, COUNT(p.payment_id) AS total_payments
+FROM customer c
+JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY c.customer_id
+ORDER BY total_payments DESC
+LIMIT 5; 
+
+SELECT CONCAT(c.first_name, ' ', c.last_name) AS full_name, COUNT(p.payment_id) AS total_payments
+FROM customer c
+JOIN payment p ON c.customer_id = p.customer_id
+GROUP BY c.customer_id
+ORDER BY total_payments DESC
+LIMIT 5;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -66,6 +111,11 @@ LIMIT 10;]]></console>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces>
+      <mapping database-type="MYSQL" interface-id="DEFAULT" />
+    </recently-used-interfaces>
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
